@@ -37,7 +37,7 @@ describe 'Adagrams' do
       expect(is_valid).must_equal true
     end
 
-    xit 'returns false word contains letters not in the drawn letters' do
+    it 'returns false word contains letters not in the drawn letters' do
       drawn_letters = ['D', 'O', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X']
       test_word = 'DOG'
 
@@ -46,7 +46,7 @@ describe 'Adagrams' do
       expect(is_valid).must_equal false
     end
 
-    xit 'returns false word contains repeated letters more than in the drawn letters' do
+    it 'returns false word contains repeated letters more than in the drawn letters' do
       drawn_letters = ['A', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X']
       test_word = 'AAA'
 

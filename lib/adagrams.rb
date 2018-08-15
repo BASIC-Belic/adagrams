@@ -84,7 +84,7 @@ end
 
 
 def uses_available_letters?(word, letter_in_hand)
-  hand = letter_in_hand.dup
+  temp_hand = letter_in_hand.dup
   inputted_word = []
   inputted_word << word.split("")
   inputted_word.flatten!

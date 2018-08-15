@@ -109,5 +109,44 @@ def uses_available_letters?(word, letter_in_hand)
 
   return check_letter
 
+end
 
+
+def score_word (word)
+
+  this_letter = []
+  this_letter << word.upcase.split("")
+  this_letter.flatten!
+  puts "#{this_letter}"
+
+  score = 0
+  this_letter.each do |value|
+
+
+  case value
+  when 'A', 'E', 'I', 'O' , 'U' , 'L' , 'N' , 'R' , 'S' , 'T'
+    score += 1
+  when 'D', 'G'
+    score += 2
+  when 'B', 'C', 'M', 'P'
+    score += 3
+  when 'F', 'H', 'V', 'W' , 'Y'
+    score += 4
+  when 'K'
+    score += 5
+  when 'J', 'X'
+    score += 8
+  when 'Q', 'Z'
+    score += 10
+  end
+  puts "Score in loop: #{score}"
+end
+
+
+if word.length > 6 && word.length < 11
+  score += 8
+  puts "Score add 8: #{score}"
+end
+
+return score
 end

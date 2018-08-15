@@ -81,4 +81,33 @@ random_draw = letter_pool.sample(10)
 return random_draw
 end
 
-puts "#{draw_letters}"
+
+
+def uses_available_letters?(word, letter_in_hand)
+  hand = letter_in_hand.dup
+  inputted_word = []
+  inputted_word << word.split("")
+  inputted_word.flatten!
+
+  check_letter = true
+
+
+  inputted_word.each do |letter|
+    index = 0
+
+
+    if !temp_hand.include?(letter)
+      check_letter = false
+    end
+
+    if temp_hand.include?(letter)
+      index = temp_hand.index(letter)
+      temp_hand.delete_at(index)
+    end
+
+  end
+
+  return check_letter
+
+
+end

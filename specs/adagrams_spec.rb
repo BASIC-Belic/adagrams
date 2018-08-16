@@ -81,7 +81,7 @@ describe 'Adagrams' do
     end
   end
 
-  xdescribe 'highest_score_from method' do
+  describe 'highest_score_from method' do
     it 'returns a hash that contains the word and score of best word in an array' do
       words = ['X', 'XX', 'XXX', 'XXXX']
       best_word = highest_score_from words

@@ -74,11 +74,11 @@ letter_pool = populate_letter_pool(letter_pool)
 # Def draw method to return an array of 10 randomly selected letter from the pool of letter
 
 def draw_letters
-random_draw = []
-letter_pool = populate_letter_pool(letter_pool)
-#random draw from array
-random_draw = letter_pool.sample(10)
-return random_draw
+  random_draw = []
+  letter_pool = populate_letter_pool(letter_pool)
+  #random draw from array
+  random_draw = letter_pool.sample(10)
+  return random_draw
 end
 
 
@@ -123,30 +123,132 @@ def score_word (word)
   this_letter.each do |value|
 
 
-  case value
-  when 'A', 'E', 'I', 'O' , 'U' , 'L' , 'N' , 'R' , 'S' , 'T'
-    score += 1
-  when 'D', 'G'
-    score += 2
-  when 'B', 'C', 'M', 'P'
-    score += 3
-  when 'F', 'H', 'V', 'W' , 'Y'
-    score += 4
-  when 'K'
-    score += 5
-  when 'J', 'X'
-    score += 8
-  when 'Q', 'Z'
-    score += 10
+    case value
+    when 'A', 'E', 'I', 'O' , 'U' , 'L' , 'N' , 'R' , 'S' , 'T'
+      score += 1
+    when 'D', 'G'
+      score += 2
+    when 'B', 'C', 'M', 'P'
+      score += 3
+    when 'F', 'H', 'V', 'W' , 'Y'
+      score += 4
+    when 'K'
+      score += 5
+    when 'J', 'X'
+      score += 8
+    when 'Q', 'Z'
+      score += 10
+    end
   end
-  puts "Score in loop: #{score}"
+
+
+  if word.length > 6 && word.length < 11
+    score += 8
+  end
+
+  return score
 end
 
+def score_word (word)
 
-if word.length > 6 && word.length < 11
-  score += 8
-  puts "Score add 8: #{score}"
+  this_letter = []
+  this_letter << word.upcase.split("")
+  this_letter.flatten!
+  #puts "#{this_letter}"
+
+  score = 0
+  this_letter.each do |value|
+
+    case value
+    when 'A', 'E', 'I', 'O' , 'U' , 'L' , 'N' , 'R' , 'S' , 'T'
+      score += 1
+    when 'D', 'G'
+      score += 2
+    when 'B', 'C', 'M', 'P'
+      score += 3
+    when 'F', 'H', 'V', 'W' , 'Y'
+      score += 4
+    when 'K'
+      score += 5
+    when 'J', 'X'
+      score += 8
+    when 'Q', 'Z'
+      score += 10
+    end
+  end
+
+
+  if word.length > 6 && word.length < 11
+    score += 8
+  end
+
+  return score
 end
 
-return score
+# WAVE 4 SYNTAX
+
+def highest_score_from(words)
+
+  highest_scoring_hash = {
+    :score => 0,
+    :word => words.first
+  }
+
+  words.each do |word|
+    current_score = score_word(word)
+    current_word = word
+
+    # puts "Incumbent #{highest_scoring_hash[:word]} (score #{highest_scoring_hash[:score]})"
+    # puts "New word #{current_word} (score #{current_score})"
+
+    if current_score > highest_scoring_hash[:score]
+      # puts "new word has higher score, taking it"
+      highest_scoring_hash[:score] = current_score
+      highest_scoring_hash[:word] = current_word
+
+      # in case of a score tie
+    elsif current_score == highest_scoring_hash[:score]
+
+      #fewer letter wins
+      # if highest_scoring_hash[:word].length > current_word.length &&
+      #   (highest_scoring_hash[:word].length != 10 && current_word.length !=10)
+      #
+      #   highest_scoring_hash[:score] = current_score
+      #   highest_scoring_hash[:word] = current_word
+      #
+      # # word length of 10 wins
+      # elsif current_word.length == 10 && highest_scoring_hash[:word].length < 10
+      #   highest_scoring_hash[:score] = current_score
+      #   highest_scoring_hash[:word] = current_word
+      #   # when lengths are equal picking first (the one already stored in hash)
+      # elsif current_word.length == highest_scoring_hash[:word].length ||
+      #   highest_scoring_hash[:word].length == 10
+      #   #do nothing
+      # end
+      #fewest words wins
+      if current_word.length < highest_scoring_hash[:word].length && highest_scoring_hash[:word].length < 10
+        # puts "current word is shorter"
+        highest_scoring_hash[:score] = current_score
+        highest_scoring_hash[:word] = current_word
+      elsif highest_scoring_hash[:word].length < current_word.length && current_word.length  < 10
+        # puts "current word is shorter"
+
+
+        #elsif if 10, 10 wins
+      elsif current_word.length == 10 && current_word.length > highest_scoring_hash[:word].length
+        # puts "current word is length 10"
+        highest_scoring_hash[:score] = current_score
+        highest_scoring_hash[:word] = current_word
+
+      elsif highest_scoring_hash[:word].length == 10 && highest_scoring_hash[:word].length > current_word.length
+        # puts "Incumbent word is length 10"
+
+        #elsif length equal, first wins
+      elsif current_word.length == highest_scoring_hash[:word].length
+        #do nothing
+
+      end
+    end
+  end
+  return highest_scoring_hash
 end

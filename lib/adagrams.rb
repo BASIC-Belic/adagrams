@@ -189,64 +189,41 @@ end
 
 def highest_score_from(words)
 
+# creating a hash to store highest scoring word with its score value
   highest_scoring_hash = {
     :score => 0,
     :word => words.first
   }
 
+# loop thur the array and test for score and word length to identify highest scoring word
   words.each do |word|
     current_score = score_word(word)
     current_word = word
 
-    # puts "Incumbent #{highest_scoring_hash[:word]} (score #{highest_scoring_hash[:score]})"
-    # puts "New word #{current_word} (score #{current_score})"
-
+    # word that has the highest score wins
     if current_score > highest_scoring_hash[:score]
-      # puts "new word has higher score, taking it"
+      
       highest_scoring_hash[:score] = current_score
       highest_scoring_hash[:word] = current_word
 
       # in case of a score tie
     elsif current_score == highest_scoring_hash[:score]
 
-      #fewer letter wins
-      # if highest_scoring_hash[:word].length > current_word.length &&
-      #   (highest_scoring_hash[:word].length != 10 && current_word.length !=10)
-      #
-      #   highest_scoring_hash[:score] = current_score
-      #   highest_scoring_hash[:word] = current_word
-      #
-      # # word length of 10 wins
-      # elsif current_word.length == 10 && highest_scoring_hash[:word].length < 10
-      #   highest_scoring_hash[:score] = current_score
-      #   highest_scoring_hash[:word] = current_word
-      #   # when lengths are equal picking first (the one already stored in hash)
-      # elsif current_word.length == highest_scoring_hash[:word].length ||
-      #   highest_scoring_hash[:word].length == 10
-      #   #do nothing
-      # end
-      #fewest words wins
-      if current_word.length < highest_scoring_hash[:word].length && highest_scoring_hash[:word].length < 10
-        # puts "current word is shorter"
-        highest_scoring_hash[:score] = current_score
-        highest_scoring_hash[:word] = current_word
-      elsif highest_scoring_hash[:word].length < current_word.length && current_word.length  < 10
-        # puts "current word is shorter"
+      #f ewer letter wins
+      if highest_scoring_hash[:word].length > current_word.length &&
+        (highest_scoring_hash[:word].length != 10 && current_word.length !=10)
 
-
-        #elsif if 10, 10 wins
-      elsif current_word.length == 10 && current_word.length > highest_scoring_hash[:word].length
-        # puts "current word is length 10"
         highest_scoring_hash[:score] = current_score
         highest_scoring_hash[:word] = current_word
 
-      elsif highest_scoring_hash[:word].length == 10 && highest_scoring_hash[:word].length > current_word.length
-        # puts "Incumbent word is length 10"
-
-        #elsif length equal, first wins
-      elsif current_word.length == highest_scoring_hash[:word].length
-        #do nothing
-
+      # word length of 10 wins
+      elsif current_word.length == 10 && highest_scoring_hash[:word].length < 10
+        highest_scoring_hash[:score] = current_score
+        highest_scoring_hash[:word] = current_word
+        # when lengths are equal picking first (the one already stored in hash)
+      elsif current_word.length == highest_scoring_hash[:word].length ||
+        highest_scoring_hash[:word].length == 10
+        # do nothing
       end
     end
   end

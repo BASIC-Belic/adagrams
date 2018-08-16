@@ -3,6 +3,7 @@
 # 8/13/18
 require 'csv'
 
+# WAVE 1 SYNTAX
 # defining method to populate letter pool per frequecies for each letter
 def populate_letter_pool(letter_pool)
   total_letter_pool = []
@@ -70,7 +71,6 @@ end
 
 letter_pool = populate_letter_pool(letter_pool)
 
-# puts "#{letter_pool}"
 
 # Def draw method to return an array of 10 randomly selected letter from the pool of letter
 
@@ -83,6 +83,7 @@ def draw_letters
 end
 
 
+# WAVE 2 SYNTAX
 
 def uses_available_letters?(word, letter_in_hand)
   temp_hand = letter_in_hand.dup
@@ -90,15 +91,10 @@ def uses_available_letters?(word, letter_in_hand)
   inputted_word << word.upcase.split("")
   inputted_word.flatten!
 
-  # puts "Word is #{word}"
-  # puts "letters in hand #{letter_in_hand}"
-
   check_letter = true
-
 
   inputted_word.each do |letter|
     index = 0
-
 
     if !temp_hand.include?(letter)
       check_letter = false
@@ -108,58 +104,19 @@ def uses_available_letters?(word, letter_in_hand)
       index = temp_hand.index(letter)
       temp_hand.delete_at(index)
     end
-
   end
 
   return check_letter
 
 end
 
-
+# WAVE 3 SYNTAX
+# Scoring the word based on above parameters of scoring chart
 def score_word (word)
 
   this_letter = []
   this_letter << word.upcase.split("")
   this_letter.flatten!
-  puts "#{this_letter}"
-
-  score = 0
-  this_letter.each do |value|
-
-
-    case value
-    when 'A', 'E', 'I', 'O' , 'U' , 'L' , 'N' , 'R' , 'S' , 'T'
-      score += 1
-    when 'D', 'G'
-      score += 2
-    when 'B', 'C', 'M', 'P'
-      score += 3
-    when 'F', 'H', 'V', 'W' , 'Y'
-      score += 4
-    when 'K'
-      score += 5
-    when 'J', 'X'
-      score += 8
-    when 'Q', 'Z'
-      score += 10
-    end
-  end
-
-
-  if word.length > 6 && word.length < 11
-    score += 8
-  end
-
-  return score
-end
-
-def score_word (word)
-
-  # given_word = word.dup.upcase
-  this_letter = []
-  this_letter << word.upcase.split("")
-  this_letter.flatten!
-  #puts "#{this_letter}"
 
   score = 0
   this_letter.each do |value|
@@ -194,13 +151,13 @@ end
 
 def highest_score_from(words)
 
-# creating a hash to store highest scoring word with its score value
+  # creating a hash to store highest scoring word with its score value
   highest_scoring_hash = {
     :score => 0,
     :word => words.first
   }
 
-# loop thur the array and test for score and word length to identify highest scoring word
+  # loop thur the array and test for score and word length to identify highest scoring word
   words.each do |word|
     current_score = score_word(word)
     current_word = word
@@ -221,7 +178,7 @@ def highest_score_from(words)
         highest_scoring_hash[:score] = current_score
         highest_scoring_hash[:word] = current_word
 
-      # word length of 10 wins
+        # word length of 10 wins
       elsif current_word.length == 10 && highest_scoring_hash[:word].length < 10
         highest_scoring_hash[:score] = current_score
         highest_scoring_hash[:word] = current_word
@@ -235,6 +192,7 @@ def highest_score_from(words)
   return highest_scoring_hash
 end
 
+# WAVE 5 SYNTAX
 # is it a valid dictionary word?
 def is_in_english_dict?(input)
 

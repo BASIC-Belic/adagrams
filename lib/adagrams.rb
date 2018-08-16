@@ -1,6 +1,7 @@
 # Chantelle and Semret (Pair-Programing)
 # Adagram project
 # 8/13/18
+require 'csv'
 
 # defining method to populate letter pool per frequecies for each letter
 def populate_letter_pool(letter_pool)
@@ -86,8 +87,11 @@ end
 def uses_available_letters?(word, letter_in_hand)
   temp_hand = letter_in_hand.dup
   inputted_word = []
-  inputted_word << word.split("")
+  inputted_word << word.upcase.split("")
   inputted_word.flatten!
+
+  # puts "Word is #{word}"
+  # puts "letters in hand #{letter_in_hand}"
 
   check_letter = true
 
@@ -151,6 +155,7 @@ end
 
 def score_word (word)
 
+  # given_word = word.dup.upcase
   this_letter = []
   this_letter << word.upcase.split("")
   this_letter.flatten!
@@ -202,7 +207,7 @@ def highest_score_from(words)
 
     # word that has the highest score wins
     if current_score > highest_scoring_hash[:score]
-      
+
       highest_scoring_hash[:score] = current_score
       highest_scoring_hash[:word] = current_word
 
@@ -228,4 +233,20 @@ def highest_score_from(words)
     end
   end
   return highest_scoring_hash
+end
+
+# is it a valid dictionary word?
+def is_in_english_dict?(input)
+
+
+  results = false
+  dictionary = CSV.read("assets/dictionary-english.csv",headers: true, header_converters: :symbol)
+  dictionary.each do |word|
+    word.each do |k, v|
+      if v.downcase == input.downcase
+        results = true
+      end
+    end
+  end
+  return results
 end

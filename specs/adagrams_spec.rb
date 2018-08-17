@@ -28,13 +28,15 @@ describe 'Adagrams' do
 
   describe 'uses_available_letters? method' do
 
-    it 'returns true if the submitted letters are valid against the drawn letters' do
+    it 'returns true if the submitted letters are valid against the drawn letters regardless of case sensitivety' do
       drawn_letters = ['D', 'O', 'G', 'X', 'X', 'X', 'X', 'X', 'X', 'X']
-      test_word = 'DOG'
+      test_words = ['dog', 'DoG', 'DOG']
 
-      is_valid = uses_available_letters? test_word, drawn_letters
+      test_words.each do |test_word|
+        is_valid = uses_available_letters? test_word, drawn_letters
 
-      expect(is_valid).must_equal true
+        expect(is_valid).must_equal true
+      end
     end
 
     it 'returns false word contains letters not in the drawn letters' do

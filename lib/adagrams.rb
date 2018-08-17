@@ -3,8 +3,6 @@
 # 8/13/18
 require 'csv'
 
-# WAVE 1 SYNTAX
-
 # def populate_letter_pool(letter_pool)
 #   total_letter_pool = []
 #   letter = ""
@@ -34,9 +32,12 @@ require 'csv'
 #   return total_letter_pool.flatten
 # end
 
-def populate_letter_pool(letter_pool)
+# WAVE 1 SYNTAX
+def draw_letters
 
-  total_letter_pool = ('A'..'Z').map do |char|
+  random_draw = []
+
+  letter_pool = ('A'..'Z').map do |char|
     case char
     when 'A', 'I'
       letter = char * 9
@@ -57,27 +58,17 @@ def populate_letter_pool(letter_pool)
     end
   end
 
-  total_letter_pool_final = total_letter_pool.map do |chars|
+  split_letter_pool = letter_pool.map do |chars|
     chars.split("")
   end
 
-return total_letter_pool_final.flatten
-end
-
-letter_pool = populate_letter_pool(letter_pool)
-puts "LETTER POOL: #{letter_pool}"
-# Def draw method to return an array of 10 randomly selected letter from the pool of letter
-
-def draw_letters
-  random_draw = []
-  letter_pool = populate_letter_pool(letter_pool)
-  #random draw from array
-  random_draw = letter_pool.sample(10)
+  #random draw of 10 from array and flatten the letter pool
+  random_draw = split_letter_pool.flatten.sample(10)
   return random_draw
+
 end
 
-
-# WAVE 2 SYNTAX
+puts "Random draw: #{draw_letters}"
 
 def uses_available_letters?(word, letter_in_hand)
   temp_hand = letter_in_hand.dup

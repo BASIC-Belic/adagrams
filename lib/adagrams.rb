@@ -3,72 +3,35 @@
 # 8/13/18
 require 'csv'
 
-# def populate_letter_pool(letter_pool)
-#   total_letter_pool = []
-#   letter = ""
-#   ('A'..'Z').each do |char|
-#     case char
-#     when 'A', 'I'
-#       letter = char * 9
-#     when 'B', 'C', 'F', 'H', 'M', 'P', 'V', 'W', 'Y'
-#       letter = char * 2
-#     when 'D', 'L', 'S', 'U'
-#       letter = char * 4
-#     when 'E'
-#       letter = char * 12
-#     when 'G'
-#       letter = char * 3
-#     when 'J', 'K', 'Q', 'X', 'Z'
-#       letter = char * 1
-#     when 'N', 'R', 'T'
-#       letter = char * 6
-#     when 'O'
-#       letter = char * 8
-#     end
-#
-#     total_letter_pool << letter.split("")
-#   end
-#
-#   return total_letter_pool.flatten
-# end
-
 # WAVE 1 SYNTAX
 def draw_letters
 
   random_draw = []
 
-  split_letter_pool = ('A'..'Z').map do |char|
+  letter_pool = ('A'..'Z').map do |char|
     case char
     when 'A', 'I'
       letter = char * 9
-      letter.scan /\w/
     when 'B', 'C', 'F', 'H', 'M', 'P', 'V', 'W', 'Y'
       letter = char * 2
-      letter.scan /\w/
     when 'D', 'L', 'S', 'U'
       letter = char * 4
-      letter.scan /\w/
     when 'E'
       letter = char * 12
-      letter.scan /\w/
     when 'G'
       letter = char * 3
-      letter.scan /\w/
     when 'J', 'K', 'Q', 'X', 'Z'
       letter = char * 1
-      letter.scan /\w/
     when 'N', 'R', 'T'
       letter = char * 6
-      letter.scan /\w/
     when 'O'
       letter = char * 8
-      letter.scan /\w/
     end
   end
 
-  # split_letter_pool = letter_pool.map do |chars|
-  #   chars.split("")
-  # end
+  split_letter_pool = letter_pool.map do |chars|
+    chars.split("")
+  end
 
   #random draw of 10 from array and flatten the letter pool
   random_draw = split_letter_pool.flatten.sample(10)
@@ -76,7 +39,7 @@ def draw_letters
 
 end
 
-puts "Random draw: #{draw_letters}"
+# puts "Random draw: #{draw_letters}"
 
 def uses_available_letters?(word, letter_in_hand)
   temp_hand = letter_in_hand.dup

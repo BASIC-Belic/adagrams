@@ -37,30 +37,38 @@ def draw_letters
 
   random_draw = []
 
-  letter_pool = ('A'..'Z').map do |char|
+  split_letter_pool = ('A'..'Z').map do |char|
     case char
     when 'A', 'I'
       letter = char * 9
+      letter.scan /\w/
     when 'B', 'C', 'F', 'H', 'M', 'P', 'V', 'W', 'Y'
       letter = char * 2
+      letter.scan /\w/
     when 'D', 'L', 'S', 'U'
       letter = char * 4
+      letter.scan /\w/
     when 'E'
       letter = char * 12
+      letter.scan /\w/
     when 'G'
       letter = char * 3
+      letter.scan /\w/
     when 'J', 'K', 'Q', 'X', 'Z'
       letter = char * 1
+      letter.scan /\w/
     when 'N', 'R', 'T'
       letter = char * 6
+      letter.scan /\w/
     when 'O'
       letter = char * 8
+      letter.scan /\w/
     end
   end
 
-  split_letter_pool = letter_pool.map do |chars|
-    chars.split("")
-  end
+  # split_letter_pool = letter_pool.map do |chars|
+  #   chars.split("")
+  # end
 
   #random draw of 10 from array and flatten the letter pool
   random_draw = split_letter_pool.flatten.sample(10)

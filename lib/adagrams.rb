@@ -5,10 +5,38 @@ require 'csv'
 
 # WAVE 1 SYNTAX
 
+# def populate_letter_pool(letter_pool)
+#   total_letter_pool = []
+#   letter = ""
+#   ('A'..'Z').each do |char|
+#     case char
+#     when 'A', 'I'
+#       letter = char * 9
+#     when 'B', 'C', 'F', 'H', 'M', 'P', 'V', 'W', 'Y'
+#       letter = char * 2
+#     when 'D', 'L', 'S', 'U'
+#       letter = char * 4
+#     when 'E'
+#       letter = char * 12
+#     when 'G'
+#       letter = char * 3
+#     when 'J', 'K', 'Q', 'X', 'Z'
+#       letter = char * 1
+#     when 'N', 'R', 'T'
+#       letter = char * 6
+#     when 'O'
+#       letter = char * 8
+#     end
+#
+#     total_letter_pool << letter.split("")
+#   end
+#
+#   return total_letter_pool.flatten
+# end
+
 def populate_letter_pool(letter_pool)
-  total_letter_pool = []
-  letter = ""
-  ('A'..'Z').each do |char|
+
+  total_letter_pool = ('A'..'Z').map do |char|
     case char
     when 'A', 'I'
       letter = char * 9
@@ -27,13 +55,17 @@ def populate_letter_pool(letter_pool)
     when 'O'
       letter = char * 8
     end
-
-    total_letter_pool << letter.split("")
   end
 
-  return total_letter_pool.flatten
+  total_letter_pool_final = total_letter_pool.map do |chars|
+    chars.split("")
+  end
+
+return total_letter_pool_final.flatten
 end
 
+letter_pool = populate_letter_pool(letter_pool)
+puts "LETTER POOL: #{letter_pool}"
 # Def draw method to return an array of 10 randomly selected letter from the pool of letter
 
 def draw_letters

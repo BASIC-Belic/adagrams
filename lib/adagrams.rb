@@ -4,63 +4,28 @@
 require 'csv'
 
 # WAVE 1 SYNTAX
-# defining method to populate letter pool per frequecies for each letter
+
 def populate_letter_pool(letter_pool)
   total_letter_pool = []
   letter = ""
   ('A'..'Z').each do |char|
-    if char == 'A'
-      letter = "A" * 9
-    elsif char == 'B'
-      letter = "B" * 2
-    elsif char == 'C'
-      letter = "C" * 2
-    elsif char == 'D'
-      letter = "D" * 4
-    elsif char == 'E'
-      letter = "E" * 12
-    elsif char == 'F'
-      letter = "F" * 2
-    elsif char == 'G'
-      letter = "G" * 3
-    elsif char == 'H'
-      letter = "H" * 2
-    elsif char == 'I'
-      letter = "I" * 9
-    elsif char == 'J'
-      letter = "J" * 1
-    elsif char == 'K'
-      letter = "K" * 1
-    elsif char == 'L'
-      letter = "L" * 4
-    elsif char == 'M'
-      letter = "M" * 2
-    elsif char == 'N'
-      letter = "N" * 6
-    elsif char == 'O'
-      letter = "O" * 8
-    elsif char == 'P'
-      letter = "P" * 2
-    elsif char == 'Q'
-      letter = "Q" * 1
-    elsif char == 'R'
-      letter = "R" * 6
-    elsif char == 'S'
-      letter = "S" * 4
-    elsif char == 'T'
-      letter = "T" * 6
-    elsif char == 'U'
-      letter = "U" * 4
-    elsif char == 'V'
-      letter = "V" * 2
-    elsif char == 'W'
-      letter = "W" * 2
-    elsif char == 'X'
-      letter = "X" * 1
-    elsif char == 'Y'
-      letter = "Y" * 2
-    elsif char == 'Z'
-      letter = "Z" * 1
+    case char
+    when 'A', 'I'
+      letter = char * 9
+    when 'B', 'C', 'F', 'H', 'M', 'P', 'V', 'W', 'Y'
+      letter = char * 2
+    when 'D', 'L', 'S', 'U'
+      letter = char * 4
+    when 'E'
+      letter = char * 12
+    when 'G'
+      letter = char * 3
+    when 'J', 'K', 'Q', 'X', 'Z'
+      letter = char * 1
+    when 'N', 'R', 'T'
+      letter = char * 6
+    when 'O'
+      letter = char * 8
     end
 
     total_letter_pool << letter.split("")
@@ -68,9 +33,6 @@ def populate_letter_pool(letter_pool)
 
   return total_letter_pool.flatten
 end
-
-letter_pool = populate_letter_pool(letter_pool)
-
 
 # Def draw method to return an array of 10 randomly selected letter from the pool of letter
 
